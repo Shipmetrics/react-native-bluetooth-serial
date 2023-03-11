@@ -90,6 +90,11 @@ RCT_EXPORT_METHOD(disconnect:(RCTPromiseResolveBlock)resolve
     resolve((id)kCFBooleanTrue);
 }
 
++ (BOOL)requiresMainQueueSetup
+{
+    return YES;
+}
+
 RCT_EXPORT_METHOD(subscribe:(NSString *)delimiter
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejector:(RCTPromiseRejectBlock)reject)
