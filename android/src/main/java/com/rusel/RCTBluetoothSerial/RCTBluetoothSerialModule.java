@@ -229,12 +229,16 @@ public class RCTBluetoothSerialModule extends ReactContextBaseJavaModule impleme
     public void list(Promise promise) {
         WritableArray deviceList = Arguments.createArray();
         if (mBluetoothAdapter != null) {
+          try {
             Set<BluetoothDevice> bondedDevices = mBluetoothAdapter.getBondedDevices();
 
             for (BluetoothDevice rawDevice : bondedDevices) {
                 WritableMap device = deviceToWritableMap(rawDevice);
                 deviceList.pushMap(device);
             }
+          } catch (SecurityException e) {
+            Log.e(TAG, "Cannot list devices due to missing Permissions", e);
+          }
         }
         promise.resolve(deviceList);
     }
