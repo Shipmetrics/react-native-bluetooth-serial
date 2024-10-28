@@ -1,7 +1,7 @@
 const ReactNative = require('react-native')
 const { Buffer } = require('buffer')
-const { NativeModules, DeviceEventEmitter, NativeEventEmitter } = ReactNative
-const BluetoothSerial = NativeModules.BluetoothSerial
+const { NativeModules, NativeEventEmitter } = ReactNative
+const BluetoothSerial = NativeModules.RCTBluetoothSerial
 
 const BluetoothSerialEmitter = new NativeEventEmitter(BluetoothSerial)
 
@@ -35,6 +35,11 @@ class BluetoothManager {
       data = Buffer.from(data)
     }
     return BluetoothSerial.writeToDevice(data.toString('base64'))
+  }
+
+  static module() {
+    console.log("Module", BluetoothSerial)
+    return BluetoothSerial
   }
 }
 
