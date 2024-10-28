@@ -38,7 +38,6 @@ class BluetoothManager {
   }
 
   static module() {
-    console.log("Module", BluetoothSerial)
     return BluetoothSerial
   }
 }
